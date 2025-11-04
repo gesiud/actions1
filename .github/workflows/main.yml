@@ -1,1 +1,17 @@
 
+# first workflow
+
+name: my name
+
+on: push
+    branches:
+      - main
+    workflow_dispatch:
+  jobs:
+    first_job:
+      name: My first job
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo 'Hello world 🤣'
+      shel: bash
+      
