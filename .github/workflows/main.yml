@@ -16,4 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: No build required
-        run: echo "No build required; skipping."
+        run: |
+          echo "No build required for this repository."
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Ref: $GITHUB_REF"
+          echo "Commit SHA: $GITHUB_SHA"
+          echo "Triggered by: $GITHUB_ACTOR"
+          echo ""
+          echo "This workflow has no build or test steps configured."
+          echo "If you expect CI to run, add build/test jobs or include a requirements.txt and tests in the repository."
+          echo "Skipping installation, testing and deployment steps."
