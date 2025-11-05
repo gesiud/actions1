@@ -1,21 +1,38 @@
+name: CI
 
-# first workflow
-
-name: my name
-
-on: 
+on:
   push:
     branches:
+      - master
       - main
-  workflow_dispatch:
-    
+  pull_request:
+    branches:
+      - master
+      - main
+
 jobs:
-  first_job:
-    name: My first job
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run tests
+        run: |
+          pytest -q
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'Hello world 🤣'
-
-
-
-
+      - uses: actions/checkout@v2
+      - name: Deploy placeholder
+        run: echo "Deploying on push to $GITHUB_REF"
