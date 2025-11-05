@@ -27,12 +27,3 @@ jobs:
       - name: Run tests
         run: |
           pytest -q
-
-  deploy:
-    needs: build
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Deploy placeholder
-        run: echo "Deploying on push to $GITHUB_REF"
